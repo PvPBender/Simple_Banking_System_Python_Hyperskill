@@ -199,6 +199,6 @@ files:
     if __name__ == '__main__':
         BankingSystem('banking.banking').run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/109/stages/592/implement#comment
+feedback_link: https://hyperskill.org/learn/step/9828#comment
 status: Unchecked
 record: -1
