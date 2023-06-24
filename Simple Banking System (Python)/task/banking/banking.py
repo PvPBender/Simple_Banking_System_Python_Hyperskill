@@ -5,20 +5,32 @@ from random import randint
 class Accounts:
     accounts_list = {}
     credit_cards = {}
-    iin = "400000"  # Issuer Identification Number
+    bin = "400000"  # Bank Identification Number
 
     def __init__(self, account_num):
         self.account_num = account_num  # customer account number
-        self.checksum = str(randint(0, 9))  # later Luhn algorithm will be used
-        self.credit_card = Accounts.iin + str(account_num) + self.checksum
-        self.pin = str(randint(1, 9998)).zfill(4)
+        self.credit_card = Accounts.bin + str(account_num)
 
+        self.checksum = get_checksum(self.credit_card)
+        self.credit_card = self.credit_card + self.checksum
+
+        self.pin = str(randint(1, 9998)).zfill(4)
         Accounts.credit_cards[self.credit_card] = self.pin
 
         self.balance = 0
 
     def get_balance(self):
         print(f"\nBalance: {self.balance}")
+
+
+def get_checksum(credit_card):
+    cc_list = [int(x) for x in list(credit_card)]
+    for i in range(0, len(cc_list), 2):
+        cc_list[i] *= 2
+        if cc_list[i] > 9:
+            cc_list[i] -= 9
+
+    return str(10 - (sum(cc_list) % 10))
 
 
 def main_menu_ask():
