@@ -6,11 +6,11 @@ class Accounts:
     accounts_list = {}
     credit_cards = {}
     iin = "400000"  # Issuer Identification Number
-    checksum = str(randint(0, 9))  # later Luhn algorithm will be used
 
     def __init__(self, account_num):
         self.account_num = account_num  # customer account number
-        self.credit_card = Accounts.iin + str(account_num) + Accounts.checksum
+        self.checksum = str(randint(0, 9))  # later Luhn algorithm will be used
+        self.credit_card = Accounts.iin + str(account_num) + self.checksum
         self.pin = str(randint(1, 9998)).zfill(4)
 
         Accounts.credit_cards[self.credit_card] = self.pin
